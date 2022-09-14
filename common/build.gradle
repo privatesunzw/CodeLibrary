@@ -72,4 +72,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:3.6.0"
 
     implementation "com.alibaba:fastjson:1.2.58"
+
+    //日志输出 可输出集合
+    implementation 'com.orhanobut:logger:2.2.0'
+
 }

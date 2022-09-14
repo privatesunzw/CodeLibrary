@@ -28,6 +28,10 @@ abstract class BaseActivity : AppCompatActivity() {
     /*初始化界面*/
     protected abstract fun init()
 
+    /**
+     * 子类可选继承方法区
+     */
+
     /*解析上个页面传过来的数据*/
     protected open fun initBundle() {}
 
@@ -35,7 +39,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected open fun onClick(view: View) {}
 
     /*跳转界面事件回调*/
-    protected open fun onRouterResult(url: String) {}
+    protected open fun onRouterResult(url: String,resultCode: Int, data: Intent?) {}
 
     /**
      * 生命周期执行顺序区
@@ -61,11 +65,18 @@ abstract class BaseActivity : AppCompatActivity() {
      * 自定义方法区
      */
     /*设置view监听，与onclick一起使用*/
+//    fun setOnClickListener(vararg arr: View) {
+//        for (view in arr) {
+//            view.setOnClickListener { onClick(view) }
+//        }
+//    }
+
     fun setOnClickListener(arr: Array<View>) {
         for (view in arr) {
-            view.setOnClickListener { onClick(it) }
+            view.setOnClickListener { onClick(view) }
         }
     }
+
 
     fun showToast(str: String) {
         ToastUtils.showLong(this, str)
@@ -81,11 +92,15 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
+    fun jumpActivity(path:String){
+        DRouter.build(path).open()
+    }
+
     //扩展DRouter  封装start方法的回调
     fun Request.open() {
         start(mContext, object : RouterCallback.ActivityCallback() {
             override fun onActivityResult(resultCode: Int, data: Intent?) {
-                onRouterResult(uri.toString())
+                onRouterResult(uri.toString(),resultCode,data)
             }
         })
     }

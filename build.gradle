@@ -7,7 +7,7 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:7.2.1"
-//        classpath 'io.github.didi:drouter-plugin-proxy:1.0.2'
+        classpath 'io.github.didi:drouter-plugin-proxy:1.0.2'
     }
 }
 
@@ -19,4 +19,10 @@ plugins {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+allprojects {
+    repositories {
+
+    }
 }
