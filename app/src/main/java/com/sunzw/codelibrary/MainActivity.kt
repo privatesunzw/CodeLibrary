@@ -5,7 +5,6 @@ import android.view.View
 import com.didi.drouter.annotation.Router
 import com.sunzw.codelibrary.databinding.ActivityMainBinding
 import com.sunzw.codelibrary.router.RouterPath
-
 import com.sunzw.common.BaseActivity
 
 
@@ -20,16 +19,20 @@ class MainActivity : BaseActivity() {
     }
 
     override fun init() {
-        setOnClickListener(arrayOf(mBinding.tvSubmit))
+        setOnClickListener(mBinding.tvSubmit)
     }
 
     override fun onClick(view: View) {
         when(view){
-            mBinding.tvSubmit-> jumpActivity(RouterPath.testActivity)
+            mBinding.tvSubmit-> jumpActivity(RouterPath.testActivity3)
         }
     }
 
     override fun onRouterResult(url: String, resultCode: Int, data: Intent?) {
+        when(url){
+            RouterPath.testActivity3->{}
+
+        }
 
     }
 

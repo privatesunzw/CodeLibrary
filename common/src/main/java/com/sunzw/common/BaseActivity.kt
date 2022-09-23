@@ -10,6 +10,7 @@ import com.didi.drouter.api.DRouter
 import com.didi.drouter.router.Request
 import com.didi.drouter.router.RouterCallback
 import com.example.common.utils.ToastUtils
+import com.sunzw.common.utils.LogUtil
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -39,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity() {
     protected open fun onClick(view: View) {}
 
     /*跳转界面事件回调*/
-    protected open fun onRouterResult(url: String,resultCode: Int, data: Intent?) {}
+    protected open fun onRouterResult(url: String, resultCode: Int, data: Intent?) {}
 
     /**
      * 生命周期执行顺序区
@@ -53,6 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
         DRouter.init(application)
         initBundle()
         init()
+        LogUtil.logE("CurrentActivity is %s",mActivity.toString())
     }
 
     override fun onDestroy() {
@@ -64,14 +66,9 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 自定义方法区
      */
-    /*设置view监听，与onclick一起使用*/
-//    fun setOnClickListener(vararg arr: View) {
-//        for (view in arr) {
-//            view.setOnClickListener { onClick(view) }
-//        }
-//    }
 
-    fun setOnClickListener(arr: Array<View>) {
+    /**设置view监听，与onclick一起使用*/
+    fun setOnClickListener(vararg arr: View) {
         for (view in arr) {
             view.setOnClickListener { onClick(view) }
         }
@@ -92,7 +89,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
-    fun jumpActivity(path:String){
+    fun jumpActivity(path: String) {
         DRouter.build(path).open()
     }
 
@@ -100,7 +97,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun Request.open() {
         start(mContext, object : RouterCallback.ActivityCallback() {
             override fun onActivityResult(resultCode: Int, data: Intent?) {
-                onRouterResult(uri.toString(),resultCode,data)
+                onRouterResult(uri.toString(), resultCode, data)
             }
         })
     }

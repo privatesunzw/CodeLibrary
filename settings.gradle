@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Code Library"
 include ':app'
 include ':common'
+include ':app:test'
