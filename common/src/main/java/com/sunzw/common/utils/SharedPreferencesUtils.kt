@@ -1,4 +1,5 @@
-package com.example.common.utils
+package com.sunzw.common.utils
+
 
 import android.content.Context
 import android.content.SharedPreferences
