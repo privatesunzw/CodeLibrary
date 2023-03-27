@@ -16,3 +16,5 @@ rootProject.name = "Code Library"
 include ':app'
 include ':common'
 include ':app:test'
+include ':app:codekotlin'
+include ':app:codejava'
